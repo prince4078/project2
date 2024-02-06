@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +36,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/post")
+@EnableMethodSecurity(prePostEnabled = true)
 public class PostController {
 	@Autowired
 	private FileService fileService;
@@ -46,7 +50,7 @@ public class PostController {
 		
 	}
 	// getting all post from the database 
-	@GetMapping("/all")
+	@GetMapping("/allPost")
 	public ResponseEntity<PostResponse> getAllPost(
 			@RequestParam(value="pageNumber",defaultValue=AppConstant.PAGE_NUMBER,required=false) Integer pageNumber,
 			@RequestParam(value="pageSize" ,defaultValue=AppConstant.PAGE_SIZE,required=false) Integer pageSize,
@@ -63,6 +67,7 @@ public class PostController {
 		return new ResponseEntity<PostDto>(fetchedPost,HttpStatus.OK);
 	}
     // deleteing post by post Id 
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/delete/{postId}")
 	public ResponseEntity<ApiResponse> deletePost(@PathVariable Integer postId){
 		String message=postService.deletePost(postId);

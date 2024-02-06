@@ -21,6 +21,7 @@ public class BlogapplicationApplication {
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
+	
 
 	
 }

@@ -16,7 +16,7 @@ import com.sparx.blogapplication.repository.UserRepository;
 @Service
 public class UserServiceImp implements UserService {
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder; 
 	@Autowired
 	private ModelMapper modelMapper;
 	@Autowired
