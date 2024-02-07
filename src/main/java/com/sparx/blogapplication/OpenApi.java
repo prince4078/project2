@@ -1,6 +1,4 @@
-package com.sparx.blogapplication.config;
-
-import org.springframework.context.annotation.Configuration;
+package com.sparx.blogapplication;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
@@ -32,11 +30,11 @@ import io.swagger.v3.oas.annotations.servers.Server;
 	            servers= {
                           @Server(
                         		  description="dev",
-                        		  url="http://localhost:8083/"
+                        		  url="http://localhost:8084/"
                         		  ),
                           @Server(
                         		  description="test",
-                        		  url="http://localhost:8083/"
+                        		  url="http://localhost:8084/"
                         		  )
                           
 	            				
@@ -56,8 +54,6 @@ import io.swagger.v3.oas.annotations.servers.Server;
 		scheme="bearer"
 		
 		)
-@Configuration
-public class OpenApiConfig {
-	
+public class OpenApi {
 
 }
