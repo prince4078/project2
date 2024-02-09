@@ -17,15 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sparx.blogapplication.payloads.CategoryDto;
 import com.sparx.blogapplication.service.CategoryService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/category")
+@Tag(name="Category Controller" ,description="This Controller is defined for the Categories related Operations ")
+//@Hidden // this annoation is bassically use to hide the particular Controller from the Swagger Documentation 
 public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	
 	// adding a category 
+
 	@PostMapping("/add")
 	public ResponseEntity<CategoryDto> addCategory(@Valid @RequestBody CategoryDto categoryDto){
 		CategoryDto addedCategory=categoryService.addCategory(categoryDto);
@@ -33,6 +40,11 @@ public class CategoryController {
 	}
 	// get a single category
 	@GetMapping("/{categoryId}")
+	@Parameter(
+            name =  "categoryId",
+            description  = "category id  Which identify the category ",
+            example = "124",
+            required = true) 
 	public ResponseEntity<CategoryDto> getCategory(@PathVariable Integer categoryId){
 		CategoryDto fetchedCategory=categoryService.getCategory(categoryId);
 		return new ResponseEntity<CategoryDto>(fetchedCategory,HttpStatus.OK);

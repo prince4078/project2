@@ -22,12 +22,15 @@ import com.sparx.blogapplication.payloads.JwtRequest;
 import com.sparx.blogapplication.payloads.JwtResponse;
 import com.sparx.blogapplication.service.UserService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name="Auth Controller" , description="This Controller is defined for login purpose ")
 public class AuthController {
 	
-	 @Autowired
+	   @Autowired
 	    private UserService userService;
 
 	    @Autowired

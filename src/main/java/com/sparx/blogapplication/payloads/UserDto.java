@@ -2,6 +2,7 @@ package com.sparx.blogapplication.payloads;
 
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -14,11 +15,26 @@ public class UserDto {
 	@NotEmpty(message="name cannot be empty ")
 	@Size(min=3,max=30,message="the name provided must be between 3 and 30")
 	@Pattern(regexp="^[a-zA-Z]+$",message="name Must Contain only Alphabets ")
+	@Schema(
+		    description = "Name of the user", 
+		    name = "name", 
+		    type = "string", 
+		    example = "Prince")
 	private String name ;
 	@Email(message="email address is not valid ")
+	@Schema(
+		    description = "Email Address  of the user", 
+		    name = "email", 
+		    type = "string", 
+		    example = "Prince@gmail.com")
 	private String email;
 	@NotEmpty(message="password must not be empty ")
 	@Size(min=6,max=20,message="password be must be between 6 to 20 character")
+	@Schema(
+		    description = "describe about the user ", 
+		    name = "about", 
+		    type = "string", 
+		    example = "He is a Normal User or He is admin User ")
 	private String password;
 	@NotEmpty
 	private String about;

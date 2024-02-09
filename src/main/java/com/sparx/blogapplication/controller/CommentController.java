@@ -14,8 +14,11 @@ import com.sparx.blogapplication.payloads.ApiResponse;
 import com.sparx.blogapplication.payloads.CommentDto;
 import com.sparx.blogapplication.service.CommentService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/comment")
+@Tag(name="CommentController", description="this Controller is realted for theh comment related Operations ")
 public class CommentController {
 	@Autowired
 	private CommentService commentService;

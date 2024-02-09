@@ -31,12 +31,17 @@ import com.sparx.blogapplication.payloads.PostResponse;
 import com.sparx.blogapplication.service.FileService;
 import com.sparx.blogapplication.service.PostService;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/post")
 @EnableMethodSecurity(prePostEnabled = true)
+@Tag(name="Post Controller " ,description=" This Controller is define to handle Post Related Operation ")
 public class PostController {
 	@Autowired
 	private FileService fileService;
@@ -50,6 +55,43 @@ public class PostController {
 		
 	}
 	// getting all post from the database 
+	@ApiResponses({
+		@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode="200",description="Post fetched Sucessfully"),
+		@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode="404",description ="unauthorised Request ")
+	
+	})
+	
+	/* @Parameter annotation helps to specify the name,  description, and example value of the parameter 
+	 * And @Schema annotation allows us to control Swagger-specific 
+	 * definitions such as description, name, type, example values,
+	 *  and allowed values for the model properties.*/
+	@Parameters(
+			{
+				
+				@Parameter(
+			            name =  "pageNumber",
+			            description  = "it will show which page data we are seeing ",
+			            example = "1",
+			            required = false) ,
+				@Parameter(
+			            name =  "pageSize",
+			            description  = "how may record will be there on a single page ",
+			            example = "5",
+			            required = false),
+				@Parameter(
+			            name =  "sortBy",
+			            description  = "This will represnt how the data will be sorted when representing  ",
+			            example = "Id",
+			            required = false),
+				@Parameter(
+			            name =  "sortDir",
+			            description  = "this will represnt the data will be in which order  ",
+			            example = "asc",
+			            required = false)
+				
+				
+			})
+			
 	@GetMapping("/allPost")
 	public ResponseEntity<PostResponse> getAllPost(
 			@RequestParam(value="pageNumber",defaultValue=AppConstant.PAGE_NUMBER,required=false) Integer pageNumber,

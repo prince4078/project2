@@ -20,15 +20,25 @@ import com.sparx.blogapplication.payloads.ApiResponse;
 import com.sparx.blogapplication.payloads.UserDto;
 import com.sparx.blogapplication.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name="User Controller " , description = "This is User Controller and performs task related to the user Entity")
 public class UserController {
 	@Autowired
 	private UserService userService;
  
 	// add a User
+	@Operation(summary="create new User ", description = "this api will create New User ")
+	@ApiResponses(value= {
+	@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode="200",description="User Creatation Sucess | ok "),
+	@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode="404",description="not authorsied  !! "),
+	@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode="201",description="new User Created  "),
+	})
 	 @PostMapping("/create")
 	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
 	   UserDto user=userService.createUser(userDto);
