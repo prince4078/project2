@@ -32,7 +32,7 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	// adding a category 
-
+	
 	@PostMapping("/add")
 	public ResponseEntity<CategoryDto> addCategory(@Valid @RequestBody CategoryDto categoryDto){
 		CategoryDto addedCategory=categoryService.addCategory(categoryDto);

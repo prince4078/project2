@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -33,5 +34,13 @@ public class GlobalExceptionHandler {
 		});
 		return new ResponseEntity<Map<String,String>>(resp,HttpStatus.BAD_REQUEST);
 		//return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resp);
+	}
+	@ExceptionHandler(InterceptorGenratedException.class)
+	public ResponseEntity<ApiResponse> interceptorExceptionHandler(InterceptorGenratedException ex){
+		ApiResponse response=new ApiResponse();
+//		System.out.println("the message from the exception "+ex.getMessage());
+		String message="the access is denied by the Interceptor Method ";
+		response.setMessage(message);
+		return new ResponseEntity<ApiResponse>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.sparx.blogapplication.entities.User;
 import com.sparx.blogapplication.exception.ResourceNotFoundException;
 import com.sparx.blogapplication.payloads.UserDto;
+import com.sparx.blogapplication.payloads.UserResponseDto;
 import com.sparx.blogapplication.repository.UserRepository;
 @Service
 public class UserServiceImp implements UserService {
@@ -56,7 +57,7 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public List<UserDto> getAllUsers() {
+	public List< UserResponseDto > getAllUsers() {
 		// TODO Auto-generated method stub
 //		List<User> userList=userRepository.findAll();
 //		List<UserDto> userDtoList=new ArrayList<>();
@@ -66,7 +67,8 @@ public class UserServiceImp implements UserService {
 //		}
 		List<User> userlist=userRepository.findAll();
 		List<UserDto> userDtoList=userlist.stream().map(user -> this.userToDto(user)).collect(Collectors.toList());
-		return userDtoList;
+		List<UserResponseDto> userResponseDto=userDtoList.stream().map(user -> modelMapper.map(user, UserResponseDto.class)).collect(Collectors.toList());
+		return userResponseDto;
 	}
 
 	@Override

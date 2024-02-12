@@ -2,6 +2,8 @@ package com.sparx.blogapplication.controller;
 
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sparx.blogapplication.payloads.ApiResponse;
 import com.sparx.blogapplication.payloads.UserDto;
+import com.sparx.blogapplication.payloads.UserResponseDto;
 import com.sparx.blogapplication.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +45,7 @@ public class UserController {
 	 @PostMapping("/create")
 	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
 	   UserDto user=userService.createUser(userDto);
-		return new ResponseEntity<>(user,HttpStatus.OK);
+	   return new ResponseEntity<>(user,HttpStatus.OK);
 	}
 	
 	// get a User
@@ -53,9 +56,10 @@ public class UserController {
 	 }
 	
 	// get All User 
+	 
 	 @GetMapping("/allUser")
-	 public List<UserDto> getAllUsers(){
-		 List<UserDto> userlist=userService.getAllUsers();
+	 public List<UserResponseDto> getAllUsers(){
+		 List<UserResponseDto> userlist=userService.getAllUsers();
 		 return userlist;
 	 }
 	

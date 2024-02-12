@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,6 +30,11 @@ public class User implements UserDetails{
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;
     @Column(name="name",nullable=false,length=100)
+    @Schema(
+    	    description = "first name of the user", 
+    	    name = "name", 
+    	    type = "string", 
+    	    example = "Vatsal")
     private String name ;
 	private String email;
 	private String password;
