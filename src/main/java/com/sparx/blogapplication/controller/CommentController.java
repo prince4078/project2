@@ -27,7 +27,7 @@ public class CommentController {
 	public ResponseEntity<CommentDto> addComment(
 	@RequestBody CommentDto commentDto,@PathVariable("postId")Integer postId)
 			{
-    	System.out.println("________________________________"+postId);
+    	
 		CommentDto addedComment =commentService.addComment(commentDto, postId);
 		return new ResponseEntity<CommentDto> (addedComment,HttpStatus.OK);
 	}
